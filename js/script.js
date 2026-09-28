@@ -138,7 +138,7 @@ form.addEventListener('submit', (e) => {
 
     const mensagem = `Olá! Meu nome é *${nome}* e vim pelo site.\n\nTenho interesse em: *${interesseTexto}*.\nMeu contato atual é: ${telefone}`;
 
-    const seuNumero = "55819875099"; 
+    const seuNumero = "5581987555099"; 
 
     const url = `https://wa.me/${seuNumero}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, '_blank');
