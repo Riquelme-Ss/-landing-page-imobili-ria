@@ -35,6 +35,8 @@ body {
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+
+/*
 /* Imagem de Fundo local (da sua pasta img) */
 #hero {
     /* O gradiente continua aqui para garantir que os botões e textos fiquem legíveis */
