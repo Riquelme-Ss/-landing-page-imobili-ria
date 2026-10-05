@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imobiliária | Luciana Farias</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Seu CSS Customizado -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+ 
+    <!-- CABEÇALHO COM EFEITO VIDRO -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm fixed w-full top-0 z-40 border-b border-gray-200/50 transition-all">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+
+           <!-- LOGO INSPIRADA NA IMAGEM ORIGINAL (FORMATO DE 'C') -->
+            <a href="#" class="text-2xl md:text-3xl font-serif tracking-widest text-gray-900 flex items-center transition hover:opacity-80">
+                <span class="uppercase">Lu</span>
+                
+                <!-- A Casa Azul (sem a parede direita) substituindo a letra "C" -->
+                <svg class="w-6 h-6 md:w-8 md:h-8 mx-[2px] transform -translate-y-[2px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 21H4V10L12 3L20 10" stroke="#003399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="miter"/>
+                </svg>
+                
+                <span class="uppercase">iana <span class="ml-2">Farias</span></span>
+            </a>
+
+            <nav class="hidden md:flex space-x-8 items-center font-medium">
+                <a href="#hero" class="hover:text-blue-500 transition">Início</a>
+                <a href="#imoveis" class="hover:text-blue-500 transition">Imóveis</a>
+                <a href="#contato" class="hover:text-blue-500 transition">Contato</a>
+                <a href="#contato" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full font-semibold transition flex items-center gap-2 shadow-md">
+                    <i class="fab fa-whatsapp"></i> Fale Conosco
+                </a>
+            </nav>
+
+            <button id="btn-mobile" class="md:hidden text-2xl text-blue-900 focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Menu Mobile com efeito vidro -->
+        <div id="menu-mobile" class="hidden bg-white/90 backdrop-blur-md px-6 py-4 shadow-lg md:hidden fixed w-full z-40 border-b border-gray-200">
+            <a href="#hero" class="block py-3 border-b border-gray-200/50 hover:text-blue-500 font-medium">Início</a>
+            <a href="#imoveis" class="block py-3 border-b border-gray-200/50 hover:text-blue-500 font-medium">Imóveis</a>
+            <a href="#contato" class="block py-3 hover:text-blue-500 font-medium">Contato</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION COM EFEITO VIDRO -->
+    <section id="hero" class="mt-20 pt-20 pb-24 flex items-center justify-center min-h-[70vh]">
+        <div class="container mx-auto px-6 text-center flex justify-center">
+            <div class="bg-black/50 backdrop-blur-sm p-8 md:p-12 rounded-3xl max-w-4xl shadow-2xl border border-white/20">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+                    Encontre o imóvel que combina com a sua vida
+                </h1>
+                <p class="text-lg text-gray-200 mb-10 max-w-2xl mx-auto drop-shadow-md">
+                    Do seu primeiro imóvel financiado pela Caixa à exclusividade de uma casa independente. O seu novo padrão de vida começa aqui.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE IMÓVEIS -->
+    <section id="imoveis" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-blue-900 mb-6">Conheça Nossas Opções</h2>
+            
+            <!-- Filtro de Cidades -->
+            <div class="flex justify-center mb-8">
+                <select id="filtro-cidade" onchange="aplicarFiltros()" class="w-full md:w-64 border-2 border-blue-600 rounded-full px-6 py-2 font-semibold text-gray-700 focus:outline-none bg-white cursor-pointer shadow-sm hover:shadow transition">
+                    <option value="todas">Todas as Cidades</option>
+                    <option value="igarassu">Igarassu</option>
+                    <option value="paulista">Paulista</option>
+                    <option value="Camaragibe">Camaragibe</option>
+                    <option value="abreu-e-lima">Abreu e Lima</option>
+                    <option value="goiana">Goiana</option>
+                </select>
+            </div>
+
+            <!-- Abas de Filtro de Categoria -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button id="tab-todos" onclick="filtrarCategoria('todos')" class="tab-btn active-tab px-6 py-2 rounded-full font-semibold border-2 border-blue-600">Todos</button>
+                <button id="tab-caixa" onclick="filtrarCategoria('caixa')" class="tab-btn inactive-tab px-6 py-2 rounded-full font-semibold border-2 border-blue-600">Financiamento Caixa (MCMV)</button>
+                <button id="tab-solta" onclick="filtrarCategoria('solta')" class="tab-btn inactive-tab px-6 py-2 rounded-full font-semibold border-2 border-amber-500">Casas Soltas</button>
+            </div>
+
+            <!-- Grade de Imóveis -->
+            <div class="grid md:grid-cols-3 gap-8" id="grade-imoveis">
+                
+                <!-- Imóvel 1: Sítio dos Marcos (Igarassu) -->
+                <div class="card-imovel bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-categoria="solta"   data-cidade="igarassu">
+                    <div class="h-48 relative cursor-pointer group" onclick="abrirModal([
+                        'img/SM/Sitio dos Marcos.jpg',
+                        'img/SM/sm-2.png',
+                        'img/SM/sm-3.png',
+                        'img/SM/sm-4.jpg',
+                        'img/SM/sm-5.png',
+                        'img/SM/sm-1.png'
+                    ])">
+                        <img src="img/SM/Sitio dos Marcos.jpg" alt="Casa Sítio dos Marcos" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded shadow">Casa Solta</span>
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-4xl opacity-0 group-hover:opacity-100 transition-all transform scale-50 group-hover:scale-100"></i>
+                        </div>
+                    </div>                 
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Casa Solta Sítio dos Marcos</h3>
+                        <p class="text-sm font-bold text-blue-500 mb-2"><i class="fas fa-map-marker-alt"></i> Igarassu - PE</p>
+                        <p class="text-sm text-gray-500 mb-4">Casa 2 Quartos • Financiamento caixa • Morar Bem</p>
+                        <p class="text-blue-600 font-bold text-2xl mb-4">R$ 185.000</p>
+                        <a href="#contato" class="block text-center w-full bg-gray-100 hover:bg-amber-500 hover:text-white py-2 rounded transition font-semibold">Tenho Interesse</a>
+                    </div>
+                </div>
+
+                <!-- Imóvel 2: Casa na Saramandaia (Igarassu) -->
+                <div class="card-imovel bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-categoria="caixa" data-cidade="igarassu">
+                    <div class="h-48 relative cursor-pointer group" onclick="abrirModal([
+                        'img/Saramandaia/smd-0.jpg',
+                        'img/Saramandaia/smd-1.jpg',
+                        'img/Saramandaia/smd-2.jpg',
+                        'img/Saramandaia/smd-3.jpg',
+                        'img/Saramandaia/smd-4.jpg',
+                        'img/Saramandaia/smd-5.jpg'
+                    ])">
+                        <img src="img/Saramandaia/smd-0.jpg" alt="Casa na Saramandaia" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded shadow">MCMV</span>
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-4xl opacity-0 group-hover:opacity-100 transition-all transform scale-50 group-hover:scale-100"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Casa na Saramandaia</h3>
+                        <p class="text-sm font-bold text-blue-500 mb-2"><i class="fas fa-map-marker-alt"></i> Igarassu - PE</p>
+                        <p class="text-sm text-gray-500 mb-4">2 Quartos • 1 Vaga • Financiamento Caixa</p>
+                        <p class="text-blue-900 font-bold text-2xl mb-4">R$ 180.000</p>
+                        <a href="#contato" class="block text-center w-full bg-gray-100 hover:bg-blue-600 hover:text-white py-2 rounded transition font-semibold">Tenho Interesse</a>
+                    </div>
+                </div>
+                
+                <!-- Imóvel 3: S.M-2 (Igarassu) -->
+                <div class="card-imovel bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-categoria="solta" data-cidade="igarassu">
+                    <div class="h-48 relative cursor-pointer group" onclick="abrirModal([
+                        'img/S.M-2/SM02.jpg',
+                        'img/S.M-2/2.jpg',
+                        'img/S.M-2/3.jpg',
+                        'img/S.M-2/4.jpg',
+                        'img/S.M-2/5.jpg',
+                        'img/S.M-2/6.jpg',
+                        'img/S.M-2/7.jpg',
+                        'img/S.M-2/8.jpg'
+                    ])">
+                        <img src="img/S.M-2/SM02.jpg" alt="Apto" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded shadow">Casa Solta</span>
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-4xl opacity-0 group-hover:opacity-100 transition-all transform scale-50 group-hover:scale-100"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Casa no Sítio dos Marcos </h3>
+                        <p class="text-sm font-bold text-blue-500 mb-2"><i class="fas fa-map-marker-alt"></i> Igarassu - PE</p>
+                        <p class="text-sm text-gray-500 mb-4">2 Quartos • 1 Vagas • Financiamento caixa</p>
+                        <p class="text-blue-900 font-bold text-2xl mb-4">R$ 193.000</p>
+                        <a href="#contato" class="block text-center w-full bg-gray-100 hover:bg-amber-500 hover:text-white py-2 rounded transition font-semibold">Tenho Interesse</a>
+                    </div>
+                </div>
+
+                <!-- Imóvel 4: S.M-3 (Igarassu) -->
+                <div class="card-imovel bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-categoria="caixa" data-cidade="igarassu">
+                    <div class="h-48 relative cursor-pointer group" onclick="abrirModal([
+                        'img/SM-3/sm-fachada.jpeg',
+                        'img/SM-3/WhatsApp Image 2026-09-23 at 19.38.14.jpeg',
+                        'img/SM-3/WhatsApp Image 2026-09-23 at 19.38.1.jpeg',
+                        'img/SM-3/are.jpeg',
+                        'img/SM-3/ban.jpeg',
+                        'img/SM-3/cz.jpeg',
+                        'img/SM-3/qua.jpeg'  
+                    ])">
+                        <img src="img/SM-3/sm-fachada.jpeg" alt="Apto" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded shadow">MCMV</span>
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-4xl opacity-0 group-hover:opacity-100 transition-all transform scale-50 group-hover:scale-100"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Sítio dos Marcos (teste)</h3>
+                        <p class="text-sm font-bold text-blue-500 mb-2"><i class="fas fa-map-marker-alt"></i> Igarassu - PE</p>
+                        <p class="text-sm text-gray-500 mb-4">2 Quartos • 1 Vagas • Minha casa minha vida</p>
+                        <p class="text-blue-900 font-bold text-2xl mb-4">R$ 185.000</p>
+                        <a href="#contato" class="block text-center w-full bg-gray-100 hover:bg-amber-500 hover:text-white py-2 rounded transition font-semibold">Tenho Interesse</a>
+                    </div>
+                </div>
+
+                <!-- Imóvel 5: SCR (Igarassu) -->
+                <div class="card-imovel bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-categoria="caixa" data-cidade="igarassu">
+                    <div class="h-48 relative cursor-pointer group" onclick="abrirModal([
+                        'img/SCR/Capa.jpg',
+                        'img/SCR/Sala.jpg',
+                        'img/SCR/Sala-0.jpg',
+                        'img/SCR/entrada.jpg',
+                        'img/SCR/quart-2.jpg',
+                        'img/SCR/Frente.jpg'                                               
+                    ])">
+                        <img src="img/SCR/Capa.jpg" alt="Apto" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded shadow">MCMV</span>
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-4xl opacity-0 group-hover:opacity-100 transition-all transform scale-50 group-hover:scale-100"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Apartamento em Cruz de Rebouçãs</h3>
+                        <p class="text-sm font-bold text-blue-500 mb-2"><i class="fas fa-map-marker-alt"></i> Igarassu - PE</p>
+                        <p class="text-sm text-gray-500 mb-4">3 Quartos • 1 Vagas • Minha casa minha vida</p>
+                        <p class="text-blue-900 font-bold text-2xl mb-4">R$ 199.000</p>
+                        <a href="#contato" class="block text-center w-full bg-gray-100 hover:bg-amber-500 hover:text-white py-2 rounded transition font-semibold">Tenho Interesse</a>
+                    </div>
+                </div>
+
+
+                <!-- Imóvel 6: SCR (Igarassu) -->
+                <div class="card-imovel bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-categoria="caixa" data-cidade="igarassu">
+                    <div class="h-48 relative cursor-pointer group" onclick="abrirModal([
+                        'img/Saramandaia 2/Saramandaia-0.png',
+                        'img/Saramandaia 2/srm-1.jpg',
+                        'img/Saramandaia 2/srm-2.jpg',
+                        'img/Saramandaia 2/srm-3.jpg',
+                        'img/Saramandaia 2/srm-4.jpg',
+                        'img/Saramandaia 2/srm-5.jpg'
+                                          
+                    ])">
+                        <img src="img/Saramandaia 2/Saramandaia-0.png" alt="Apto" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded shadow">MCMV</span>
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-4xl opacity-0 group-hover:opacity-100 transition-all transform scale-50 group-hover:scale-100"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Apartamento em Cruz de Rebouçãs</h3>
+                        <p class="text-sm font-bold text-blue-500 mb-2"><i class="fas fa-map-marker-alt"></i> Igarassu - PE</p>
+                        <p class="text-sm text-gray-500 mb-4">2 Quartos • 1 Vagas • Minha casa minha vida</p>
+                        <p class="text-blue-900 font-bold text-2xl mb-4">R$ 195.000</p>
+                        <a href="#contato" class="block text-center w-full bg-gray-100 hover:bg-amber-500 hover:text-white py-2 rounded transition font-semibold">Tenho Interesse</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl flex flex-col md:flex-row gap-12">
+            <div class="md:w-1/2">
+                <h2 class="text-3xl font-bold text-blue-900 mb-6">Fale com um Especialista</h2>
+                <p class="text-gray-600 mb-8">Nossa equipe vai analisar seu perfil e indicar o melhor caminho, seja para aprovar seu crédito na Caixa ou financiar sua casa solta no MCMV.</p>
+                <div class="space-y-4 text-gray-700">
+                    <p><i class="fas fa-map-marker-alt text-blue-500 mr-3"></i> Av. Duarte Coelho, 11 - Centro</p>
+                    <p><i class="fab fa-whatsapp text-green-500 mr-3"></i> (81) 98755-5099</p>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 bg-gray-50 p-8 rounded-xl shadow-sm">
+                <form id="form-contato" class="space-y-4">
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">Nome Completo</label>
+                        <input type="text" id="nome-cliente" required class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">WhatsApp</label>
+                        <input type="tel" id="telefone-cliente" required placeholder="(81) 99999-9999" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">Qual seu principal interesse?</label>
+                        <select id="interesse-cliente" required class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500">
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="caixa">Primeiro Imóvel (Caixa/MCMV)</option>
+                            <option value="solta">Casas Soltas / Mais Espaço</option>
+                            <option value="duvida">Ainda não sei, quero simular</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded transition flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp text-xl"></i> Enviar para o WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="bg-blue-900 text-white py-8 text-center">
+        <p class="opacity-75">© 2026 Imobiliária Luciana Farias. Todos os direitos reservados. CRECI: 21.953-J</p>
+    </footer>
+
+    <!-- MODAL DO CARROSSEL DE IMAGENS (RESPONSIVO) -->
+    <div id="modal-galeria" class="fixed inset-0 bg-black bg-opacity-95 z-50 hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300">
+        
+        <!-- Botão Fechar -->
+        <button onclick="fecharModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-white text-3xl md:text-4xl hover:text-gray-400 focus:outline-none z-50 p-2 bg-black/40 md:bg-transparent rounded-full">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Container da Imagem Central -->
+        <div class="relative w-full h-full flex items-center justify-center px-0 md:px-16">
+            
+            <!-- Seta Esquerda -->
+            <button onclick="mudarImagem(-1)" class="absolute left-2 md:left-6 text-white text-3xl md:text-5xl hover:text-gray-400 focus:outline-none z-50 bg-black/40 hover:bg-black/70 rounded-full h-12 w-12 md:h-16 md:w-16 flex items-center justify-center transition">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <!-- Imagem -->
+            <img id="imagem-modal" src="" alt="Galeria do Imóvel" class="max-h-[85vh] max-w-[95vw] md:max-w-full object-contain mx-auto rounded shadow-2xl">
+            
+            <!-- Seta Direita -->
+            <button onclick="mudarImagem(1)" class="absolute right-2 md:right-6 text-white text-3xl md:text-5xl hover:text-gray-400 focus:outline-none z-50 bg-black/40 hover:bg-black/70 rounded-full h-12 w-12 md:h-16 md:w-16 flex items-center justify-center transition">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+        </div>
+
+        <!-- Contador -->
+        <div id="contador-modal" class="absolute bottom-6 md:bottom-8 text-white text-sm md:text-lg font-bold tracking-widest bg-black/60 px-4 py-2 rounded-full">
+            1 / 3
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

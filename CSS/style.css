@@ -1,0 +1,47 @@
+/* Configurações Globais */
+html {
+    scroll-behavior: smooth; /* Rolagem suave ao clicar nos links do menu */
+}
+
+/* Para o menu responsivo não "pular" */
+body {
+    overflow-x: hidden;
+}
+
+/* Estilos para as Abas de Filtro de Imóveis */
+.tab-btn {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Estado Ativo (Botão Azul) */
+.active-tab {
+    background-color: #2563eb; /* bg-blue-600 */
+    color: white;
+}
+
+/* Estado Inativo (Fundo transparente, texto da cor da borda) */
+.inactive-tab {
+    background-color: transparent;
+    color: #4b5563; /* text-gray-600 */
+}
+
+.inactive-tab:hover {
+    background-color: #f3f4f6; /* bg-gray-100 */
+}
+
+/* Animação suave para os cards aparecendo e sumindo */
+.card-imovel {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Imagem de Fundo local (da sua pasta img) */
+#hero {
+    /* O gradiente continua aqui para garantir que os botões e textos fiquem legíveis */
+    background-image: 
+                      url('../img/wallpaper-backgroud.png');
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
